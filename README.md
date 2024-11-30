@@ -7,9 +7,9 @@ ulc-codec (Ultra-Low-Complexity Codec) is intended to be a low-bitrate MDCT audi
 None (so far). Perhaps GCC if building from source.
 
 ### Installing
-Run ```make all``` to build the file-based encoding and decoding tools (```ulcencode``` and ```ulcdecode```).
-
-You could also ```make encodetool``` or ```make decodetool```.
+```shell
+git clone --recursive git@github.com:SabinetekHyfis/ulc-codec.git
+```
 
 ### cmake
 
