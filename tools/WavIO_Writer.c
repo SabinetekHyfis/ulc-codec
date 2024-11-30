@@ -27,7 +27,7 @@ int WAV_OpenW(struct WAV_State_t *WavState, const char *Filename, const struct W
 	}
 
 	//! Write the RIFF WAVE header, with Size=0
-	static const struct {
+	 const struct {
 		uint32_t CkType;
 		uint32_t CkSize;
 		uint32_t Type;
@@ -39,7 +39,7 @@ int WAV_OpenW(struct WAV_State_t *WavState, const char *Filename, const struct W
 	fwrite(&RIFF_WAVE, sizeof(RIFF_WAVE), 1, f);
 
 	//! Write the fmt chunk
-	static const struct RIFF_CkHeader_t fmt_Header = {
+	struct RIFF_CkHeader_t fmt_Header = {
 		RIFF_FOURCC("fmt "),
 		sizeof(struct WAVE_fmt_t),
 	};
@@ -47,7 +47,7 @@ int WAV_OpenW(struct WAV_State_t *WavState, const char *Filename, const struct W
 	fwrite(fmt, sizeof(struct WAVE_fmt_t), 1, f);
 
 	//! Write the data chunk header, with Size=0
-	static const struct RIFF_CkHeader_t data_Header = {
+	struct RIFF_CkHeader_t data_Header = {
 		RIFF_FOURCC("data "),
 		0,
 	};

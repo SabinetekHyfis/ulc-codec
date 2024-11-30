@@ -12,6 +12,13 @@
 #include "ulcEncoder_Internals.h"
 /**************************************/
 
+unsigned int clzzz(unsigned int x) {
+	if (x == 0) return 32; // 处理零的情况
+	unsigned long index;
+	_BitScanReverse(&index, x); // 获取最高有效位的索引
+	return 31 - index; // 计算前导零的数量
+}
+
 //! Implementation for heapsort
 //! This is used because qsort() tends to use quicksort, which
 //! has some nasty pathological cases, so I'd rather have a
@@ -317,7 +324,7 @@ int ULCi_TransformBlock(struct ULC_EncoderState_t *State, const float *Data) {
 			//!   (Log[Total[x]] - Log[Total[x*x]/Total[x]]) / Log[N]
 			//!  =(Log[Total[x] / (Total[x*x]/Total[x])) / Log[N]
 			//!  =Log[Total[x]^2 / Total[x^2]] / Log[N]
-			float ComplexityScale = 0x1.62E430p-1f*(31 - __builtin_clz(BlockSize)); //! 0x1.62E430p-1 = 1/Log2[E] for change-of-base
+			float ComplexityScale = 0x1.62E430p-1f*(31 - clzzz(BlockSize)); //! 0x1.62E430p-1 = 1/Log2[E] for change-of-base
 			Complexity = logf(SQR(ComplexityW) / Complexity) / ComplexityScale;
 			if(Complexity < 0.0f) Complexity = 0.0f; //! In case of round-off error
 			if(Complexity > 1.0f) Complexity = 1.0f;

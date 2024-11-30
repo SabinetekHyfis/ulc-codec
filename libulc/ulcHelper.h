@@ -13,7 +13,12 @@
 #define ABS(x) ((x) < 0 ? (-(x)) : (x))
 #define SQR(x) ((x)*(x))
 /**************************************/
+
+#if defined(_MSC_VER)
+#define ULC_FORCED_INLINE __forceinline
+#else
 #define ULC_FORCED_INLINE static inline __attribute__((always_inline))
+#endif
 /**************************************/
 
 //! Subblock decimation pattern

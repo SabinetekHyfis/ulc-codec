@@ -39,6 +39,7 @@ static void TransientFiltering(
 ) {
 	int n, Chan;
 
+
 	//! Extract the energy of a highpass and bandpass filter,
 	//! as changes in the low frequencies aren't important
 	//! for transients (they happen too slowly to be audible).
@@ -156,7 +157,7 @@ int ULCi_GetWindowCtrl(
 	//! Keep trying to increase the window size until the
 	//! transient drops off compared to the last window
 	//! NOTE: Default to maximum overlap, no decimation
-	int   Log2SubBlockSize = 31 - __builtin_clz(BlockSize/ULC_MAX_BLOCK_DECIMATION_FACTOR);
+	int   Log2SubBlockSize = 31 - clzzz(BlockSize/ULC_MAX_BLOCK_DECIMATION_FACTOR);
 	int   Decimation     = 0b0001;
 	float TransientRatio = 0.0f; {
 		//! First, enforce a minimum SubBlockSize of 64

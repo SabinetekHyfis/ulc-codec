@@ -45,17 +45,7 @@ static int RIFF_WAVE_fmt(FILE *f, void *User, const struct RIFF_CkHeader_t *Ck) 
 /**************************************/
 
 //! RIFF(WAVE) -> Chunks
-static const struct RIFF_CkHdl_t RIFF_WAVE_Ck[] = {
-	{RIFF_FOURCC("fmt "),RIFF_WAVE_fmt},
-	{RIFF_FOURCC("data"),RIFF_WAVE_data},
-	{0},
-};
 
-//! RIFF(WAVE)
-static const struct RIFF_CkListHdl_t RIFF_WAVE[] = {
-	{RIFF_FOURCC("WAVE"),RIFF_WAVE_Ck,NULL,NULL,NULL},
-	{0},
-};
 
 /**************************************/
 
@@ -66,6 +56,17 @@ int WAV_OpenR(struct WAV_State_t *WavState, const char *Filename) {
 
 	//! Map out the RIFF structure
 	WavState->Chunks = NULL;
+	  struct RIFF_CkHdl_t RIFF_WAVE_Ck[] = {
+	{RIFF_FOURCC("fmt "),RIFF_WAVE_fmt},
+	{RIFF_FOURCC("data"),RIFF_WAVE_data},
+	{0},
+	};
+
+	//! RIFF(WAVE)
+	struct RIFF_CkListHdl_t RIFF_WAVE[] = {
+		{RIFF_FOURCC("WAVE"),RIFF_WAVE_Ck,NULL,NULL,NULL},
+		{0},
+	};
 	int RetVal = RIFF_CkRead(f, WavState, NULL, RIFF_WAVE);
 	if(RetVal < 0) {
 		fclose(f);
