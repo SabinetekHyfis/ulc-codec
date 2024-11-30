@@ -11,6 +11,16 @@ Run ```make all``` to build the file-based encoding and decoding tools (```ulcen
 
 You could also ```make encodetool``` or ```make decodetool```.
 
+### cmake
+
+```shell
+mkdir build
+cd build
+cmake ..
+```
+
+open ULC.sln in build directory 
+
 ## Usage
 The encoding/decoding tools work with WAV files for simplicity, and to avoid external dependencies.
 
