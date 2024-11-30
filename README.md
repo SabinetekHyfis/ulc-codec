@@ -14,6 +14,7 @@ git clone --recursive git@github.com:SabinetekHyfis/ulc-codec.git
 ### cmake
 
 ```shell
+cd ulc-codec
 mkdir build
 cd build
 cmake ..
